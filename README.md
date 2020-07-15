@@ -219,6 +219,69 @@ By the way, if it be needed to customize Dockerfile name, it could use option *f
 
     docker build -f src/main/scala/Dockerize_SBT_Project/Crawler-Dockerfile -t stock_crawler:v13 src/main/scala/Dockerize_SBT_Project/
 
+Running-result of command line: <br>
+First time to build: <br>
+
+    Running Result: <br>
+    Sending build context to Docker daemon  3.181MB
+    Step 1/6 : FROM openjdk:8
+     ---> b190ad78b520
+    Step 2/6 : WORKDIR /test
+     ---> Using cache
+     ---> 40e7e45806f6
+    Step 3/6 : COPY requirements.txt ./
+     ---> 5f9e6e58b9a0
+    Step 4/6 : RUN     echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list &&     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 &&     apt-get update &&     apt-get install sbt &&     apt-get install -y python3.7 &&     apt-get install -y python3-pip &&     pip3 install --no-cache-dir -r requirements.txt
+     ---> Running in 68fa206edbf3
+    deb https://dl.bintray.com/sbt/debian /
+    Warning: apt-key output should not be parsed (stdout is not a terminal)
+    Executing: /tmp/apt-key-gpghome.RlrG3w0jEl/gpg.1.sh --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
+    gpg: key 99E82A75642AC823: public key "sbt build tool <scalasbt@gmail.com>" imported
+    gpg: Total number processed: 1
+    gpg:               imported: 1
+    Get:1 http://security.debian.org/debian-security buster/updates InRelease [65.4 kB]
+    Get:2 http://deb.debian.org/debian buster InRelease [121 kB]
+    Get:3 http://security.debian.org/debian-security buster/updates/main 
+    
+    ...... (install software package log message)
+    
+    Installing collected packages: urllib3, chardet, certifi, idna, requests
+    Successfully installed certifi-2020.6.20 chardet-3.0.4 idna-2.8 requests-2.21.0 urllib3-1.24.3
+    Removing intermediate container 68fa206edbf3
+     ---> 16aad3af1ab6
+    Step 5/6 : ADD . /test
+     ---> d6f55f519bbe
+    Step 6/6 : CMD sbt run
+     ---> Running in 83dc11b26058
+    Removing intermediate container 83dc11b26058
+     ---> 022c1a893f5c
+    Successfully built 022c1a893f5c
+    Successfully tagged test_sbt_python:v2
+
+
+After second time to build: <br>
+
+    Sending build context to Docker daemon  11.44MB
+    Step 1/6 : FROM openjdk:8
+     ---> b190ad78b520
+    Step 2/6 : WORKDIR /docker_sbt_crawler
+     ---> Using cache
+     ---> 527a5d8f06ca
+    Step 3/6 : COPY requirements.txt ./
+     ---> Using cache
+     ---> 3da14e74cad6
+    Step 4/6 : RUN     echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list &&     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 &&     apt-get update &&     apt-get install sbt &&     apt-get install -y python3 &&     apt-get install -y python3-pip &&     pip3 install --no-cache-dir -r requirements.txt
+     ---> Using cache
+     ---> a9b4dff82bd7
+    Step 5/6 : ADD . /docker_sbt_crawler
+     ---> d41c556c217c
+    Step 6/6 : CMD sbt run
+     ---> Running in cc4c921198d1
+    Removing intermediate container cc4c921198d1
+     ---> 18c4530c57bb
+    Successfully built 18c4530c57bb
+    Successfully tagged stock_crawler:v13
+
 Images
 ---
 Check what image(s) could be used. <br>
@@ -303,7 +366,4 @@ Unpause container which be paused: <br>
 If the container doesn't be needed anymore, could kill it: <br>
 
     docker kill <container ID>
-
-### Running Result
-
 
