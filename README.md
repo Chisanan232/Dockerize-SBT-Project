@@ -52,8 +52,30 @@ Running-result of command line: <br>
 ![](https://github.com/Chisanan232/Dockerize-SBT-Project/raw/master/docs/imgs/brew-config_running_result.png)
 <br>
 
+Update brew. <br>
 
-### Dockerize
+    brew update
+    
+Install docker. <br>
+
+    brew install docker
+
+It also needs to install *docker-machine* and *virtualbox* because natively docker be developed for Linux environment. <br>
+
+    brew install docker-machine
+    brew cask install virtualbox
+
+Verify the docker state. <br>
+
+    docker info
+
+Running-result of command line: <br>
+<br>
+![](https://github.com/Chisanan232/Dockerize-SBT-Project/raw/master/docs/imgs/docker-info_running_result.png)
+<br>
+
+Dockerize
+===
 It shuold clear that what thing be needed to do in Docker. <br>
 It's a SBT project. ---> Run it with command line 'sbt run'. In other words, it needs a **SBT environment**. <br>
 It will run python code (crawler part) in SBT project via command line. ---> It needs a **Python environment**. <br>
@@ -173,6 +195,110 @@ ADD . /docker_sbt_crawler
 CMD sbt run
 
 ```
+
+Execute Docker
+===
+Execute the docker image to run program or activate a service, etc. <br>
+
+Build
+---
+Build a Docker image. <br>
+
+    docker build <directory path>
+
+The directory is the path where including Dockerfile (in default setting, it will find and run the file name as *Dockerfile*). <br>
+In this project, the command line is: <br>
+
+    docker build -t stock_crawler:v13 src/main/scala/Dockerize_SBT_Project/
+
+> Option *t* means that adding a tag for the docker image. <br>
+By the way, if it be needed to customize Dockerfile name, it could use option *f* or *file*. <br>
+
+    docker build -f src/main/scala/Dockerize_SBT_Project/Crawler-Dockerfile -t stock_crawler:v13 src/main/scala/Dockerize_SBT_Project/
+
+Images
+---
+Check what image(s) could be used. <br>
+
+    docker image ls
+
+In this project, the target image ID is *18c4530c57bb*. <br>
+
+Running-result of command line: <br>
+<br>
+![](https://github.com/Chisanan232/Dockerize-SBT-Project/raw/master/docs/imgs/dokcer-image-ls_running_result.png)
+<br>
+
+Execute
+---
+In first time to execute it, it must to run it via command *run*. <br>
+Here is the description about command *run*: <br>
+
+    docker --help
+    
+    ......
+    run         Run a command in a new container <br>
+    ......
+    
+It never execute the image before, in other words, it also doesn't have the container absolutely. <br>
+
+    docker run <image ID>
+    
+In this project, the docker command line is: <br>
+
+    docker run -v /Dockerize_SBT_Project/src/main:/docker_sbt_crawler/Dockerize_SBT_Project/src/main -it 18c4530c57bb
+
+> Option *v*: Bind a list with a file system and let it to be accessible storage area . <br>
+> Option *it*: Instructs Docker to allocate a pseudo-TTY connected to the container's stdin and create a interactive bash shell in the container. ([docker run document](https://docs.docker.com/engine/reference/commandline/run/)) <br>
+
+Developers also could name the container with option *name*: <br>
+
+    docker run -name Crawler_SBT -v /Users/bryantliu/IdeaProjects/KobeDataScience/src/main/scala/Dockerize_SBT_Project/src/main:/docker_sbt_crawler/Dockerize_SBT_Project/src/main -it 18c4530c57bb
+
+Running-result of command line: <br>
+<br>
+![](https://github.com/Chisanan232/Dockerize-SBT-Project/raw/master/docs/imgs/docker-run_running_result.png)
+<br>
+
+It could verify the container info after execute the image. <br>
+
+    docker container ls -a
+
+Running-result of command line: <br>
+<br>
+![](https://github.com/Chisanan232/Dockerize-SBT-Project/raw/master/docs/imgs/docker-container-ls_running_result.png)
+<br>
+
+Stop contianer: <br>
+
+    docker stop <container ID>
+
+If it need to run the container later, please use command *start*: <br>
+
+    docker start <container ID>
+
+> Command *run*: 
+> Run command and build a new container (the container doesn't exist before). 
+> Command *start*: 
+> Activate to run a container which be stopped (in other words, the container(s) has existed before). 
+Here is the description about command *start*: <br>
+
+    docker --help
+    ......
+    start       Start one or more stopped containers
+    ......
+
+Pause container which is running: <br>
+
+    docker pause <container ID>
+    
+Unpause container which be paused: <br>
+
+    docker unpause <container ID>
+
+If the container doesn't be needed anymore, could kill it: <br>
+
+    docker kill <container ID>
 
 ### Running Result
 
