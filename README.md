@@ -54,7 +54,36 @@ Running-result of command line: <br>
 
 
 ### Dockerize
+It shuold clear that what thing be needed to do in Docker. <br>
+It's a SBT project. ---> Run it with command line 'sbt run'. In other words, it needs a **SBT environment**. <br>
+It will run python code (crawler part) in SBT project via command line. ---> It needs a **Python environment**. <br>
+It also needs a **Java environment** because of SBT.
+So below are all things developers need to confgiure in docker: <br>
+* Java
+* SBT
+* Python
 
+So select the foundation is Java. Here use **openjdk:8** because it's one of SBT requirements. <br>
+
+    FROM openjdk:8
+
+Set the directory where the code will be run in docker. <br>
+
+    WORKDIR /docker_sbt_crawler
+
+Start to configure all environment configuration it needs: <br>
+
+    RUN \
+        echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list && \
+        apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
+        apt-get update && \
+        apt-get install sbt && \
+        apt-get install -y python3 && \
+        apt-get install -y python3-pip && \
+        pip3 install --no-cache-dir -r requirements.txt
+
+(Explain keyword 'RUN')
+(Explain command line)
 
 ### Running Result
 
