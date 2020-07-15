@@ -79,7 +79,7 @@ Dockerize
 It shuold clear that what thing be needed to do in Docker. <br>
 It's a SBT project. ---> Run it with command line 'sbt run'. In other words, it needs a **SBT environment**. <br>
 It will run python code (crawler part) in SBT project via command line. ---> It needs a **Python environment**. <br>
-It also needs a **Java environment** because of SBT.
+It also needs a **Java environment** because of SBT. <br>
 So below are all things developers need to confgiure in docker: <br>
 * Java
 * SBT
@@ -88,7 +88,9 @@ So below are all things developers need to confgiure in docker: <br>
 FROM
 ---
 So select the foundation is Java. Here use **openjdk:8** because it's one of [SBT requirements](https://www.scala-sbt.org/1.x/docs/Setup.html). <br>
+
 > Install JDK (We recommend AdoptOpenJDK JDK 8 or AdoptOpenJDK JDK 11). <br>
+
 Use keyword **FROM** to load the base image. <br>
 
     FROM openjdk:8
@@ -212,6 +214,7 @@ In this project, the command line is: <br>
     docker build -t stock_crawler:v13 src/main/scala/Dockerize_SBT_Project/
 
 > Option *t* means that adding a tag for the docker image. <br>
+
 By the way, if it be needed to customize Dockerfile name, it could use option *f* or *file*. <br>
 
     docker build -f src/main/scala/Dockerize_SBT_Project/Crawler-Dockerfile -t stock_crawler:v13 src/main/scala/Dockerize_SBT_Project/
@@ -237,7 +240,7 @@ Here is the description about command *run*: <br>
     docker --help
     
     ......
-    run         Run a command in a new container <br>
+    run         Run a command in a new container
     ......
     
 It never execute the image before, in other words, it also doesn't have the container absolutely. <br>
@@ -277,10 +280,11 @@ If it need to run the container later, please use command *start*: <br>
 
     docker start <container ID>
 
-> Command *run*: 
-> Run command and build a new container (the container doesn't exist before). 
-> Command *start*: 
-> Activate to run a container which be stopped (in other words, the container(s) has existed before). 
+> Command *run*: <br>
+> Run command and build a new container (the container doesn't exist before). <br>
+> Command *start*: <br>
+> Activate to run a container which be stopped (in other words, the container(s) has existed before). <br>
+
 Here is the description about command *start*: <br>
 
     docker --help
