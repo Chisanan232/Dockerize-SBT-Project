@@ -222,7 +222,6 @@ By the way, if it be needed to customize Dockerfile name, it could use option *f
 Running-result of command line: <br>
 First time to build: <br>
 
-    Running Result: <br>
     Sending build context to Docker daemon  3.181MB
     Step 1/6 : FROM openjdk:8
      ---> b190ad78b520
