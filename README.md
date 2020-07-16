@@ -29,7 +29,7 @@ The crawler program be adapted from [AKKA-with-Crawler](https://github.com/Chisa
 
 ### Pre-Process
 First of all, it needs to install docker in environment. <br>
-For MacOS environment, must to use tool [**Homebrew**](https://brew.sh/) to install docker. Please refer to official documentation to install. <br>
+For MacOS environment, must to recommend to every developers using tool [**Homebrew**](https://brew.sh/) to install docker. Please refer to official documentation to install. <br>
 It needs to install Homebrew with only one command line: <br>
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
