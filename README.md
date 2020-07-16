@@ -87,7 +87,7 @@ So below are all things developers need to confgiure in docker: <br>
 
 FROM
 ---
-So select the foundation is Java. Here use **openjdk:8** because it's one of [SBT requirements](https://www.scala-sbt.org/1.x/docs/Setup.html). <br>
+So project selects the foundation is Java. Here it uses **openjdk:8** because it's one of [SBT requirements](https://www.scala-sbt.org/1.x/docs/Setup.html). <br>
 
 > Install JDK (We recommend AdoptOpenJDK JDK 8 or AdoptOpenJDK JDK 11). <br>
 
