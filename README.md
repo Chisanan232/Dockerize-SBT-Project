@@ -1,3 +1,16 @@
+> ## 🗄️ Archived — 2026-09-24
+>
+> This repository is **archived and read-only**. It was written in 2020 as a
+> personal learning sample while studying the technologies described below, and
+> it is no longer maintained or updated.
+>
+> The code targets 2020-era dependency versions and has not been tested against
+> current releases. It is kept public for reference only.
+>
+> No successor project is being maintained in its place.
+
+---
+
 # Dockerize-SBT-Project
 
 ### Description
